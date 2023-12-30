@@ -11,7 +11,11 @@
 <div class="posts-container">
   @if (postsService.posts$ | async) {
     @for (post of (postsService.posts$ | async); track post.id) {
-      <app-post [post]="post" (setCurrentPost)="setCurrentPost(post)"/>
+      <app-post
+        [post]="post"
+        [isActive]="(postsService.currentPost$ | async)?.id === post.id"
+        (setCurrentPost)="setCurrentPost(post)"
+      />
     }
   } @else {
     <p>You have no posts yet.</p>

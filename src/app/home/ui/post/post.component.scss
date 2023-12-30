@@ -1,7 +1,9 @@
 .post {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   border: 2px solid black;
   border-radius: 10px;
   aspect-ratio: 1/1;
