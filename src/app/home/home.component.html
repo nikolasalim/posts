@@ -1,3 +1,19 @@
-@for (post of (postsService.posts$ | async); track post.id) {
-  {{post.title}}
-}
+<div class="current-post">
+  <h1>
+    Last clicked post:
+    @if (postsService.currentPost$ | async; as currentPost) {
+      {{currentPost.id}}
+    } @else {
+      –
+    }
+  </h1>
+</div>
+<div class="posts-container">
+  @if (postsService.posts$ | async) {
+    @for (post of (postsService.posts$ | async); track post.id) {
+      <app-post [post]="post" (setCurrentPost)="setCurrentPost(post)"/>
+    }
+  } @else {
+    <p>You have no posts yet.</p>
+  }
+</div>
