@@ -1,0 +1,3 @@
+@for (post of (postsService.posts$ | async); track post.id) {
+  {{post.title}}
+}
