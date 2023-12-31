@@ -33,10 +33,8 @@ export class PostComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes && changes['isActive']) {
-      if(changes['isActive'].previousValue && !changes['isActive'].currentValue) {
-        this.setDefaultInfoOrder();
-      }
+    if (changes['isActive'] && changes['isActive'].previousValue && !changes['isActive'].currentValue) {
+      this.setDefaultInfoOrder();
     }
   }
 
