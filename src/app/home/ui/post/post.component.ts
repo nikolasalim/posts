@@ -8,11 +8,12 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { IPost } from "../../../shared/interfaces/post";
+import { NgClass } from "@angular/common";
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })

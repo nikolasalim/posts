@@ -1,4 +1,6 @@
-<a href="" class="post" (click)="togglePostInfo($event)">
-  <p>{{titleOnDisplay}}:</p>
-  <p>{{valueOnDisplay}}</p>
+<a href="" class="flex flex-col h-full w-full aspect-square border-solid border-2 rounded-2xl transition-transform duration-300 ease-in-out hover:-translate-y-1.5" [ngClass]="isActive ? 'border-[#ff3600]' : 'border-black'" (click)="togglePostInfo($event)">
+  <h1 class="capitalize text-xs text-gray-400 border-b border-b-1 border-b-gray-300 py-1 px-2">{{titleOnDisplay}}</h1>
+  <div class="p-2">
+    <p class="line-clamp-1 lg:line-clamp-2 xl:line-clamp-3 2xl:line-clamp-5">{{valueOnDisplay}}</p>
+  </div>
 </a>

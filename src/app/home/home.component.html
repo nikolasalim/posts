@@ -1,14 +1,16 @@
-<div class="current-post">
-  <h1>
-    Last clicked post:
-    @if (postsService.currentPost$ | async; as currentPost) {
-      {{currentPost.id}}
-    } @else {
-      –
-    }
+<div class="flex justify-center sticky z-10 top-0 text-3xl bg-white border-b-2 py-4 px-8 mx-4">
+  <h1 class="flex">
+    Last clicked post:&nbsp;
+    <span class="text-right w-0 text-[#ff3600] bg-amber-100">
+      @if (postsService.currentPost$ | async; as currentPost) {
+        {{currentPost.id}}
+      } @else {
+        –
+      }
+    </span>
   </h1>
 </div>
-<div class="posts-container">
+<div class="grid grid-cols-5 sm:grid-cols-10 gap-4 m-8">
   @if (postsService.posts$ | async) {
     @for (post of (postsService.posts$ | async); track post.id) {
       <app-post
