@@ -10,16 +10,16 @@
     </span>
   </h1>
 </div>
-<div class="grid grid-cols-5 sm:grid-cols-10 gap-4 m-8">
-  @if (postsService.posts$ | async) {
+@if ((postsService.posts$ | async)?.length) {
+  <div class="grid grid-cols-5 sm:grid-cols-10 gap-4 m-8">
     @for (post of (postsService.posts$ | async); track post.id) {
       <app-post
         [post]="post"
         [isActive]="(postsService.currentPost$ | async)?.id === post.id"
-        (setCurrentPost)="setCurrentPost(post)"
+        (setCurrentPost)="postsService.setCurrentPost(post)"
       />
     }
-  } @else {
-    <p>You have no posts yet.</p>
-  }
-</div>
+  </div>
+} @else {
+  <p class="text-center m-8">You have no posts yet.</p>
+}
