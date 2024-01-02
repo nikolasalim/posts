@@ -1,7 +1,7 @@
 <div class="flex justify-center sticky z-10 top-0 text-3xl bg-white border-b-2 py-4 px-8 mx-4">
   <h1 class="flex">
     Last clicked post:&nbsp;
-    <span class="text-right w-0 text-[#ff3600]">
+    <span class="text-right w-0 text-[#ff3600]" data-testid="current-post">
       @if (postsService.currentPost$ | async; as currentPost) {
         {{currentPost.id}}
       } @else {
@@ -21,5 +21,5 @@
     }
   </div>
 } @else {
-  <p class="text-center m-8">You have no posts yet.</p>
+  <p class="text-center m-8" data-testid="no-posts-alert">You have no posts yet.</p>
 }
