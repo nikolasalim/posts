@@ -24,11 +24,11 @@ export class PostComponent implements OnInit, OnChanges {
   @Output() setCurrentPost: EventEmitter<void> = new EventEmitter<void>();
   postInfoOrder: string[] = ['title', 'userId', 'id', 'body'];
   defaultInfoOrder: string[] = [...this.postInfoOrder];
-  titleOnDisplay!: string;
+  keyOnDisplay!: string;
   valueOnDisplay!: string | number;
 
   ngOnInit() {
-    this.titleOnDisplay = this.postInfoOrder[0];
+    this.keyOnDisplay = this.postInfoOrder[0];
     this.valueOnDisplay = this.post[this.postInfoOrder[0] as keyof IPost];
   }
 
@@ -42,15 +42,15 @@ export class PostComponent implements OnInit, OnChanges {
     e.preventDefault();
     const shifted: string = this.postInfoOrder.shift()!;
     this.postInfoOrder.push(shifted);
-    const keyToDisplay = this.postInfoOrder[0];
-    this.titleOnDisplay = keyToDisplay;
-    this.valueOnDisplay = this.post[keyToDisplay as keyof IPost];
+    const currentKey = this.postInfoOrder[0];
+    this.keyOnDisplay = currentKey;
+    this.valueOnDisplay = this.post[currentKey as keyof IPost];
     this.setCurrentPost.emit();
   }
 
   setDefaultInfoOrder(){
     this.postInfoOrder = [...this.defaultInfoOrder];
-    this.titleOnDisplay = this.postInfoOrder[0];
+    this.keyOnDisplay = this.postInfoOrder[0];
     this.valueOnDisplay = this.post[this.postInfoOrder[0] as keyof IPost];
   }
 }
