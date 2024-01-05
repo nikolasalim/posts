@@ -16,7 +16,6 @@ import { NgClass } from "@angular/common";
   standalone: true,
   imports: [NgClass],
   templateUrl: './post.component.html',
-  styleUrl: './post.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit, OnChanges {

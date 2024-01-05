@@ -10,7 +10,6 @@ import { ErrorMessageComponent } from "../shared/ui/error-message/error-message.
   standalone: true,
   imports: [CommonModule, PostComponent, LoadingSpinnerComponent, ErrorMessageComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
