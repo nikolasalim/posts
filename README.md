@@ -15,5 +15,5 @@ If you come in the next days, make sure to checkout the [signals](../../tree/sig
 
 ### Dev server
 
-This project uses Angular v17.0.0, so make sure to run it using a compatible node version. If you're using nvm, feel free to run `.nvmrc`
+This project uses Angular v17.0.0, so make sure to run it using a compatible node version. If you're using nvm, feel free to run `nvm use`
 When you're set, run `ng serve` for a dev server and navigate to `http://localhost:4200/`.
