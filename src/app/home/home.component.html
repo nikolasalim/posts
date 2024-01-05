@@ -10,16 +10,25 @@
     </span>
   </h1>
 </div>
-@if ((postsService.posts$ | async)?.length) {
-  <div class="grid grid-cols-5 sm:grid-cols-10 gap-4 m-8">
-    @for (post of (postsService.posts$ | async); track post.id) {
-      <app-post
-        [post]="post"
-        [isActive]="(postsService.currentPost$ | async)?.id === post.id"
-        (setCurrentPost)="postsService.setCurrentPost(post)"
-      />
-    }
-  </div>
+
+@if((postsService.posts$ | async)?.length || (postsService.hasError$ | async)) {
+  @if(postsService.hasError$ | async) {
+    <app-error-message (retry)="postsService.reFetchPosts()"/>
+  } @else {
+    <div class="grid grid-cols-5 sm:grid-cols-10 gap-4 m-8">
+      @for (post of (postsService.posts$ | async); track post.id) {
+        <app-post
+          [post]="post"
+          [isActive]="(postsService.currentPost$ | async)?.id === post.id"
+          (setCurrentPost)="postsService.setCurrentPost(post)"
+        />
+      }
+    </div>
+  }
 } @else {
-  <p class="text-center m-8" data-testid="no-posts-alert">You have no posts yet.</p>
+  @if(postsService.isLoading$ | async) {
+    <app-loading-spinner/>
+  } @else {
+    <p class="text-center m-8" data-testid="no-posts-alert">You have no posts yet.</p>
+  }
 }
