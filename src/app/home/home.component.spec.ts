@@ -38,7 +38,6 @@ describe('HomeComponent', () => {
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -49,6 +48,7 @@ describe('HomeComponent', () => {
     let currentPostIndicatorEl: DebugElement;
 
     it('should display dash if no post has been initially clicked', () => {
+      fixture.detectChanges();
       currentPostIndicatorEl = fixture.debugElement.query(By.css('[data-testid="current-post"]'));
 
       expect(currentPostIndicatorEl.nativeElement.textContent).toBe(' – ');
@@ -75,12 +75,14 @@ describe('HomeComponent', () => {
     });
 
     it('should NOT display fallback message if posts are available', () => {
+      fixture.detectChanges();
       const noPostsAlertEl = fixture.debugElement.query(By.css('[data-testid="no-posts-alert"]'));
 
       expect(noPostsAlertEl).toBeFalsy();
     });
 
     it('should render posts when posts$ is populated', () => {
+      fixture.detectChanges();
       const postEl = fixture.debugElement.query(By.css('app-post'));
 
       expect(postEl).toBeTruthy();
