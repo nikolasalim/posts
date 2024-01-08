@@ -16,4 +16,8 @@ export class HomeComponent {
 
   postsService = inject(PostsService);
 
+  currentPost = this.postsService.currentPost;
+
+  // TODO consider moving isLoading and hasError to this smart component instead
+
 }

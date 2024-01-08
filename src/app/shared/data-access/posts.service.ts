@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
@@ -9,6 +9,12 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { IPost } from "../interfaces/post";
 
 const API_BASE_URI = 'https://jsonplaceholder.typicode.com';
+
+interface IPostsState {
+  currentPost: IPost | undefined,
+  isLoading: boolean,
+  hasError: boolean
+}
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +29,13 @@ export class PostsService {
     shareReplay(1)
   );
 
-  private _currentPost: BehaviorSubject<IPost | undefined> = new BehaviorSubject<IPost | undefined>(undefined);
-  currentPost$: Observable<IPost | undefined> = this._currentPost.asObservable().pipe(distinctUntilChanged());
+  state: WritableSignal<IPostsState> = signal({
+    currentPost: undefined,
+    isLoading: false,
+    hasError: false
+  });
+
+  currentPost: Signal<IPost | undefined> = computed(() => this.state().currentPost);
 
   private _isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoading$: Observable<boolean> = this._isLoading.asObservable().pipe(distinctUntilChanged());
@@ -33,7 +44,7 @@ export class PostsService {
   hasError$: Observable<boolean> = this._hasError.asObservable().pipe(distinctUntilChanged());
 
   setCurrentPost(post: IPost): void {
-    this._currentPost.next(post);
+    this.state.update((state) => ({...state, currentPost: post}));
   }
 
   getPosts(): Observable<IPost[]> {

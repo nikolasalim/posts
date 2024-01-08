@@ -2,8 +2,8 @@
   <h1 class="flex">
     Last clicked post:&nbsp;
     <span class="text-right w-0 text-[#ff3600]" data-testid="current-post">
-      @if (postsService.currentPost$ | async; as currentPost) {
-        {{currentPost.id}}
+      @if (currentPost()) {
+        {{currentPost()?.id}}
       } @else {
         –
       }
@@ -19,7 +19,7 @@
       @for (post of (postsService.posts$ | async); track post.id) {
         <app-post
           [post]="post"
-          [isActive]="(postsService.currentPost$ | async)?.id === post.id"
+          [isActive]="currentPost()?.id === post.id"
           (setCurrentPost)="postsService.setCurrentPost(post)"
         />
       }
